@@ -45,6 +45,12 @@
             position: relative;
         }
 
+        .card audio {
+            width: 100%;
+            margin-top: 10px;
+            outline: none;
+        }
+
         h1 {
             font-family: 'Pacifico', cursive;
             color: var(--pink-dark);
@@ -197,11 +203,7 @@
 </head>
 <body>
 
-    <!-- AUDIO PLAYER -->
-    <audio id="bg-music" loop>
-        <source src="musik_ulang_tahun.mp3" type="audio/mpeg">
-        Browser Anda tidak mendukung elemen audio.
-    </audio>
+    <!-- audio moved into the letter card (see below) -->
 
     <!-- 1. HALAMAN SURAT -->
     <div id="letter-page">
@@ -220,7 +222,13 @@
             </div>
 
             <br>
-            <button class="btn-buka" onclick="bukaKejutan()">Play Music & Open Gift 🎁</button>
+            <audio id="bg-music" autoplay loop preload="auto">
+                <source src="ssstik.io_1780361411548.mp3.mpeg" type="audio/mpeg">
+                Browser Anda tidak mendukung elemen audio.
+            </audio>
+
+            <br>
+            <button class="btn-buka" onclick="bukaKejutan()">Open Gift 🎁</button>
         </div>
     </div>
 
@@ -233,40 +241,50 @@
         <!-- Foto -->
         <div class="photo-grid">
             <div class="photo-frame">
-                <img src="foto1.jpg" alt="Foto 1" onerror="this.src='https://via.placeholder.com/300x300?text=Foto+1'">
+                <img src="WhatsApp Image 2026-06-02 at 07.37.03.jpeg" alt="Foto 1" loading="lazy" onerror="this.src='https://via.placeholder.com/300x300?text=Foto+1'">
             </div>
             <div class="photo-frame">
-                <img src="foto2.jpg" alt="Foto 2" onerror="this.src='https://via.placeholder.com/300x300?text=Foto+2'">
+                <img src="WhatsApp Image 2026-06-02 at 07.37.04.jpeg" alt="Foto 2" loading="lazy" onerror="this.src='https://via.placeholder.com/300x300?text=Foto+2'">
             </div>
             <div class="photo-frame">
-                <img src="foto3.jpg" alt="Foto 3" onerror="this.src='https://via.placeholder.com/300x300?text=Foto+3'">
-            </div>
-            <div class="photo-frame">
-                <img src="foto4.jpg" alt="Foto 4" onerror="this.src='https://via.placeholder.com/300x300?text=Foto+4'">
+                <img src="WhatsApp Image 2026-06-02 at 07.37.04 (1).jpeg" alt="Foto 3" loading="lazy" onerror="this.src='https://via.placeholder.com/300x300?text=Foto+3'">
             </div>
         </div>
 
         <!-- Video -->
         <div class="video-container">
-            <video controls>
-                <source src="video_birthday.mp4" type="video/mp4">
+            <video controls preload="none">
+                <source src="WhatsApp Video 2026-06-02 at 08.48.15.mp4" type="video/mp4">
                 Browser Anda tidak mendukung elemen video.
             </video>
         </div>
     </div>
 
     <script>
+        // Try to play audio on load (may be blocked by browser autoplay policies)
+        document.addEventListener('DOMContentLoaded', function() {
+            var music = document.getElementById('bg-music');
+            if (music) {
+                music.play().catch(function(e) {
+                    console.log('Autoplay was prevented: ' + e);
+                });
+            }
+        });
+
         // Fungsi untuk membuka kejutan (galeri)
         function bukaKejutan() {
             // Sembunyikan surat, tampilkan galeri
             document.getElementById('letter-page').style.display = 'none';
             document.getElementById('gallery-page').style.display = 'block';
             
-            // Putar musik
+            // Pastikan musik berhenti ketika membuka galeri (musik hanya untuk halaman surat)
             var music = document.getElementById('bg-music');
-            music.play().catch(function(error) {
-                console.log('Musik tidak bisa diputar (kemungkinan browser melarang autoplay): ' + error);
-            });
+            try {
+                music.pause();
+                music.currentTime = 0;
+            } catch (e) {
+                console.log('Tidak bisa menghentikan musik: ' + e);
+            }
         }
 
         // Fungsi untuk kembali ke menu surat
