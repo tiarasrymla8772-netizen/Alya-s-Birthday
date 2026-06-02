@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Alya Syahirah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        /* --- DESAIN (CSS) --- */
+        :root {
+            --pink-sweet: #ffe6e6;
+            --pink-dark: #ffb3b3;
+            --gold: #d4af37;
+            --text-color: #5a3a3a;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Lora', serif;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Halaman Surat (Tampilan Awal) */
+        #letter-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 2s;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2); /* Emas */
+            max-width: 600px;
+            border: 2px solid var(--pink-sweet);
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            color: var(--pink-dark);
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .age-text {
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        .signature {
+            text-align: right;
+            font-style: italic;
+            margin-top: 20px;
+            color: var(--pink-dark);
+        }
+
+        /* Tombol */
+        .btn-buka {
+            background: linear-gradient(45deg, var(--pink-dark), var(--gold));
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            font-family: 'Lora', serif;
+        }
+
+        .btn-buka:hover {
+            transform: scale(1.1);
+        }
+
+        .music-note {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        /* Halaman Gallery (Tersembunyi) */
+        #gallery-page {
+            display: none; /* Hanya muncul setelah klik tombol */
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            animation: slideUp 1s;
+        }
+
+        .gallery-header {
+            font-family: 'Pacifico', cursive;
+            color: var(--pink-dark);
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+        }
+
+        /* Grid Foto */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .photo-frame {
+            width: 100%;
+            height: 300px;
+            background-color: #ddd;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .photo-frame:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Video Player */
+        .video-container {
+            margin-top: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        video {
+            width: 100%;
+            max-height: 500px;
+            background: black;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- AUDIO PLAYER (Tersembunyi) -->
+    <!-- GANTI 'musik_ulang_tahun.mp3' dengan nama file lagumu -->
+    <audio id="bg-music" loop>
+        <source src="musik_ulang_tahun.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <!-- 1. HALAMAN SURAT (Pertama kali dibuka) -->
+    <div id="letter-page">
+        <div class="card">
+            <div class="music-note">🎵</div>
+            <h1>Alya Syahirah</h1>
+            <div class="age-text">Happy 21st Birthday! 🎂</div>
+            
+            <div class="message">
+                <p>Happy Birthday My Dearest Friend Alyaku cantik, pintar, dan tulusnya tiada tara. Barakallah fii umrik yaa sayangku.. aku harap di umurmu yang sekarang, kamu tetap selalu mengutamakan pendidikan, karier, dan segala impianmu yang besar ya yaa. Tetap jadi Alya yang selalu aku kenal, tetap dijaga sholatnya biar kita bisa bareng-bareng ngumpul di surga nanti, semoga Allah selalu melindungi kamu dimanapun kamu berada, semoga kamu selalu dikelilingi oleh orang-orang yang sayang kamu, selalu jadi anak yang sholehah dan berbakti sama orang tua. Last but not least, i hope in the end of my deepest heart, Allah sent you the right partner that makes you always feel safe, happy, secure, provide, and guide you to Jannah with him together. Aamiin yaa rabal alamin. Once again, happy birthday sayangku!!</p>
+            </div>
+            
+            <div class="signature">
+                With all my love,<br>
+                <strong>Tiara.</strong>
+            </div>
+
+            <br>
+            <!-- Tombol Putar Musik & Buka Galeri -->
+            <button class="btn-buka" onclick="bukaKejutan()">Play Music & Open Gift 🎁</button>
+        </div>
+    </div>
+
+    <!-- 2. HALAMAN GALERY (Foto & Video) -->
+    <div id="gallery-page">
+        <div class="gallery-header">Memories with You 💖</div>
+
+        <!-- Area Foto -->
+        <div class="photo-grid">
+            <!-- GANTI 'foto1.jpg', dll sesuai nama file fotomu -->
+            <div class="photo-frame">
+                <img src="foto1.jpg" alt="Foto 1" onerror="this.src='https://via.placeholder.com/300x300?text=Foto+1'">
+            </div>
+            <div class="photo-frame">
+                <img src="foto2.jpg" alt="Foto 2" onerror="this.src='https://via.placeholder.com/300x300?text=Foto+2'">
+            </div>
+            <div class="photo-frame">
+                <img src="foto3.jpg" alt="Foto 3" onerror="this.src='https://via.placeholder.com/300x300?text=Foto+3'">
+            </div>
+            <div class="photo-frame">
+                <img src="foto4.jpg" alt="Foto 4" onerror="this.src='https://via.placeholder.com/300x300?text=Foto+4'">
+            </div>
+        </div>
+
+        <!-- Area Video -->
+        <
