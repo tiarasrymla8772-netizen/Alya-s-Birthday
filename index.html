@@ -210,6 +210,7 @@
         <div class="card">
             <div class="music-note">🎵</div>
             <h1>Alya Syahirah</h1>
+            <button id="play-btn-top" class="btn-buka" type="button">Play Music</button>
             <div class="age-text">Happy 21st Birthday! 🎂</div>
             
             <div class="message">
@@ -264,9 +265,35 @@
         // Try to play audio on load (may be blocked by browser autoplay policies)
         document.addEventListener('DOMContentLoaded', function() {
             var music = document.getElementById('bg-music');
+            var playBtn = document.getElementById('play-btn-top');
+
+            // Attempt muted autoplay (may be blocked). Keep loop enabled.
             if (music) {
+                music.loop = true;
                 music.play().catch(function(e) {
                     console.log('Autoplay was prevented: ' + e);
+                });
+            }
+
+            // Top play/pause button to explicitly start audible playback
+            if (playBtn && music) {
+                playBtn.addEventListener('click', function() {
+                    try {
+                        if (music.paused) {
+                            music.muted = false;
+                            music.loop = true;
+                            music.play().then(function() {
+                                playBtn.textContent = 'Pause Music';
+                            }).catch(function(e) {
+                                console.log('Play failed: ' + e);
+                            });
+                        } else {
+                            music.pause();
+                            playBtn.textContent = 'Play Music';
+                        }
+                    } catch (e) {
+                        console.log(e);
+                    }
                 });
             }
         });
